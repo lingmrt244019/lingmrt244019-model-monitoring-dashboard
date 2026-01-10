@@ -1,0 +1,3 @@
+timestamp,model_version,model_type,input_summary,prediction,latency_ms,feedback_score,feedback_text
+2026-01-06T17:13:12.749259,v1,baseline,"Row ID=1, Region=Central, Sub-Category=Phones",229.519696345502,17.160892486572266,4,all good 
+2026-01-06T17:13:12.757635,v2,improved,"Row ID=1, Region=Central, Sub-Category=Phones",357.69292147490404,17.160892486572266,4,all good 
