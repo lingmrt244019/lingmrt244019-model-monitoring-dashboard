@@ -1,3 +1,17 @@
 timestamp,model_version,model_type,input_summary,prediction,latency_ms,feedback_score,feedback_text
-2026-01-06T17:13:12.749259,v1,baseline,"Row ID=1, Region=Central, Sub-Category=Phones",229.519696345502,17.160892486572266,4,all good 
-2026-01-06T17:13:12.757635,v2,improved,"Row ID=1, Region=Central, Sub-Category=Phones",357.69292147490404,17.160892486572266,4,all good 
+2026-01-06T17:13:12.749259,v1,baseline,"Row ID=1, Region=Central, Sub-Category=Phones",229.5196963,17.16089249,4,all good 
+2026-01-06T17:13:12.757635,v2,improved,"Row ID=1, Region=Central, Sub-Category=Phones",357.6929215,17.16089249,4,all good 
+2026-01-10T05:33:06.895094,v1,baseline,"Row ID=4, Region=East, Sub-Category=Art",229.5204613,4.66799736,3,V2 predicts much lower sales than V1 and takes longer to respond
+2026-01-10T05:33:06.905765,v2,improved,"Row ID=4, Region=East, Sub-Category=Art",36.60919672,13.17191124,3,V2 predicts much lower sales than V1 and takes longer to respond
+2026-01-10T05:34:43.503653,v1,baseline,"Row ID=35, Region=South, Sub-Category=Accessories",229.5283663,4.482507706,5,V2 give more useful insights
+2026-01-10T05:34:43.506266,v2,improved,"Row ID=35, Region=South, Sub-Category=Accessories",243.7260144,13.99946213,5,V2 give more useful insights
+2026-01-10T05:34:58.729366,v1,baseline,"Row ID=2, Region=Central, Sub-Category=Furnishings",229.5199513,2.35915184,1,not good
+2026-01-10T05:34:58.734011,v2,improved,"Row ID=2, Region=Central, Sub-Category=Furnishings",97.02381444,8.592605591,1,not good
+2026-01-10T05:36:01.603963,v1,baseline,"Row ID=8, Region=South, Sub-Category=Phones",229.5214813,1.91617012,2,"v2 shows higher latency
+"
+2026-01-10T05:36:01.606100,v2,improved,"Row ID=8, Region=South, Sub-Category=Phones",393.1233369,12.12406158,2,"v2 shows higher latency
+"
+2026-01-10T05:37:02.540787,v1,baseline,"Row ID=19, Region=Central, Sub-Category=Paper",229.5242863,3.857135773,5,"v2 shows reasonable prediction even higher latency
+"
+2026-01-10T05:37:02.544663,v2,improved,"Row ID=19, Region=Central, Sub-Category=Paper",47.58573551,11.55638695,5,"v2 shows reasonable prediction even higher latency
+"
