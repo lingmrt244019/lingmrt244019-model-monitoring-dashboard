@@ -1,3 +1,17 @@
 timestamp,model_version,model_type,input_summary,prediction,latency_ms,feedback_score,feedback_text
-2026-01-06T17:13:12.749259,v1,baseline,"Row ID=1, Region=Central, Sub-Category=Phones",229.519696345502,17.160892486572266,4,all good 
-2026-01-06T17:13:12.757635,v2,improved,"Row ID=1, Region=Central, Sub-Category=Phones",357.69292147490404,17.160892486572266,4,all good 
+2026-01-10T05:05:00.319775,v1,baseline,"Row ID=20, Region=Central, Sub-Category=Bookcases",229.52454130910237,3.8650035858154297,4,"V2 is more informative, but the predicted value may be overestimated."
+2026-01-10T05:05:00.328381,v2,improved,"Row ID=20, Region=Central, Sub-Category=Bookcases",498.59561862992683,12.490272521972656,4,"V2 is more informative, but the predicted value may be overestimated."
+2026-01-10T05:07:12.587149,v1,baseline,"Row ID=2, Region=East, Sub-Category=Art",229.51995134358626,5.597352981567383,1,v1 and v2 differ too much for the same input
+2026-01-10T05:07:12.593134,v2,improved,"Row ID=2, Region=East, Sub-Category=Art",36.61021012041647,11.389732360839844,1,v1 and v2 differ too much for the same input
+2026-01-10T05:07:32.280584,v1,baseline,"Row ID=8, Region=South, Sub-Category=Tables",229.52148133209164,4.106998443603516,3,no comment
+2026-01-10T05:07:32.286165,v2,improved,"Row ID=8, Region=South, Sub-Category=Tables",631.7638754942119,12.205123901367188,3,no comment
+2026-01-10T05:08:31.560646,v1,baseline,"Row ID=35, Region=Central, Sub-Category=Appliances",229.52836628036582,3.9844512939453125,2,"V1 and V2 give similar results, so the benefit of V2 is not clear in this case."
+2026-01-10T05:08:31.567329,v2,improved,"Row ID=35, Region=Central, Sub-Category=Appliances",225.16717172035263,12.581586837768555,2,"V1 and V2 give similar results, so the benefit of V2 is not clear in this case."
+2026-01-10T05:09:06.724448,v1,baseline,"Row ID=12, Region=East, Sub-Category=Phones",229.52250132442856,4.26936149597168,5,"V2 provides more context, but the lower prediction seems more realistic.
+"
+2026-01-10T05:09:06.726477,v2,improved,"Row ID=12, Region=East, Sub-Category=Phones",376.96327626153686,12.412071228027344,5,"V2 provides more context, but the lower prediction seems more realistic.
+"
+2026-01-10T05:10:02.649976,v1,baseline,"Row ID=19, Region=Central, Sub-Category=Accessories",229.52428631101816,3.3936500549316406,5,"V2 gives more useful insights than V1, with only slightly higher latency.
+"
+2026-01-10T05:10:02.652645,v2,improved,"Row ID=19, Region=Central, Sub-Category=Accessories",208.30015931980796,9.638071060180664,5,"V2 gives more useful insights than V1, with only slightly higher latency.
+"
