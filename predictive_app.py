@@ -36,13 +36,15 @@ model_v1, model_v2 = load_models()
 regions_list, subcats_list = load_reference_categories()
 
 # ---------- Initialise session state ----------
-for k, v in {
+defaults = {
     "pred_ready": False,
     "v1_pred": None,
     "v2_pred": None,
-    "latency_ms": None,
+    "v1_latency_ms": None,
+    "v2_latency_ms": None,
     "input_summary": "",
-}.items():
+}
+for k, v in defaults.items():
     if k not in st.session_state:
         st.session_state[k] = v
 
@@ -62,7 +64,7 @@ if subcats_list:
 else:
     subcat = st.sidebar.selectbox("Sub-Category", ["Chairs", "Phones", "Binders", "Storage"])
 
-# Canonical input dataframe (for display only)
+# Canonical input dataframe (for display)
 input_df = pd.DataFrame({
     "Row ID": [int(row_id)],
     "Region": [region],
@@ -74,22 +76,23 @@ st.write(input_df)
 
 # ---------- BUTTON 1: RUN PREDICTION ----------
 if st.button("Run Prediction"):
-    start_time = time.time()
-
-    # v1: baseline – only uses Row ID
+    # v1: baseline – only uses Row ID (measure latency separately)
+    t0 = time.time()
     input_v1 = input_df[["Row ID"]]
     v1_pred = model_v1.predict(input_v1)[0]
+    v1_latency_ms = (time.time() - t0) * 1000.0
 
-    # v2: improved – uses Row ID + Region + Sub-Category
+    # v2: improved – uses Row ID + Region + Sub-Category (measure latency separately)
+    t1 = time.time()
     input_v2 = input_df[["Row ID", "Region", "Sub-Category"]]
     v2_pred = model_v2.predict(input_v2)[0]
-
-    latency_ms = (time.time() - start_time) * 1000.0
+    v2_latency_ms = (time.time() - t1) * 1000.0
 
     # Store in session_state so they survive reruns
     st.session_state["v1_pred"] = float(v1_pred)
     st.session_state["v2_pred"] = float(v2_pred)
-    st.session_state["latency_ms"] = float(latency_ms)
+    st.session_state["v1_latency_ms"] = float(v1_latency_ms)
+    st.session_state["v2_latency_ms"] = float(v2_latency_ms)
     st.session_state["input_summary"] = f"Row ID={int(row_id)}, Region={region}, Sub-Category={subcat}"
     st.session_state["pred_ready"] = True
 
@@ -97,8 +100,10 @@ if st.button("Run Prediction"):
 if st.session_state["pred_ready"]:
     st.subheader("Predictions (Sales)")
     st.write(f"Model v1 (baseline - Row ID only): **${st.session_state['v1_pred']:,.2f}**")
+    st.write(f"Latency v1: {st.session_state['v1_latency_ms']:.1f} ms")
+    st.write("---")
     st.write(f"Model v2 (improved - Row ID + Region + Sub-Category): **${st.session_state['v2_pred']:,.2f}**")
-    st.write(f"Latency: {st.session_state['latency_ms']:.1f} ms")
+    st.write(f"Latency v2: {st.session_state['v2_latency_ms']:.1f} ms")
 else:
     st.info("Click **Run Prediction** to see model outputs before giving feedback.")
 
@@ -119,13 +124,13 @@ if st.button("Submit Feedback"):
     if not st.session_state["pred_ready"]:
         st.warning("Please run the prediction first, then submit your feedback.")
     else:
-        # Log both models using saved predictions and input summary
+        # Log both models (now each has its own latency)
         log_prediction(
             model_version="v1",
             model_type="baseline",
             input_summary=st.session_state["input_summary"],
             prediction=st.session_state["v1_pred"],
-            latency_ms=st.session_state["latency_ms"],
+            latency_ms=st.session_state["v1_latency_ms"],
             feedback_score=feedback_score,
             feedback_text=feedback_text,
         )
@@ -135,7 +140,7 @@ if st.button("Submit Feedback"):
             model_type="improved",
             input_summary=st.session_state["input_summary"],
             prediction=st.session_state["v2_pred"],
-            latency_ms=st.session_state["latency_ms"],
+            latency_ms=st.session_state["v2_latency_ms"],
             feedback_score=feedback_score,
             feedback_text=feedback_text,
         )
